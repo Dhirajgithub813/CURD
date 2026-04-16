@@ -11,6 +11,6 @@ services:
       - key: PORT
         value: 3000
       - key: MONGODB_URI
-        generateValue: true
+        value: "mongodb+srv://username:password@cluster.mongodb.net/crud-app?retryWrites=true&w=majority"
       - key: CORS_ORIGIN
         value: "*"

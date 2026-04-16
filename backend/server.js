@@ -17,11 +17,21 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '..', 'frontend')));
 
 // Connect to MongoDB
-mongoose.connect(MONGODB_URI)
+if (!MONGODB_URI) {
+  console.error('✗ MONGODB_URI is not set in environment variables');
+  console.error('Please set MONGODB_URI in .env file');
+  process.exit(1);
+}
+
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
   .then(() => console.log('✓ Connected to MongoDB'))
   .catch(err => {
-    console.error('✗ MongoDB connection error:', err);
-    console.log('Make sure MongoDB is running or update MONGODB_URI in .env');
+    console.error('✗ MongoDB connection error:', err.message);
+    console.error('Fix: Ensure MONGODB_URI includes: mongodb+srv://username:password@host/database');
+    process.exit(1);
   });
 
 // Task Schema

@@ -1,5 +1,5 @@
-// API Base URL
-const API_URL = 'http://localhost:3000/api/tasks';
+// API Base URL - Dynamic for localhost and production
+const API_URL = window.location.origin + '/api/tasks';
 
 let tasks = [];
 let currentFilter = 'all';
