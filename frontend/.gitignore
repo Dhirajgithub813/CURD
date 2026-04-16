@@ -1,0 +1,20 @@
+# Environment variables
+.env
+.env.local
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Logs
+logs
+*.log
+
+# OS
+.DS_Store
+.vscode/
+.idea/
+
+# IDE
+*.swp
+*.swo

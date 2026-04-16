@@ -1,0 +1,14 @@
+{
+  "name": "crud-app-fullstack",
+  "version": "1.0.0",
+  "description": "A full-stack CRUD application with separate frontend and backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd backend && npm start",
+    "install-all": "cd backend && npm install",
+    "dev": "cd backend && npm start"
+  },
+  "keywords": ["crud", "fullstack", "frontend", "backend"],
+  "author": "",
+  "license": "ISC"
+}
