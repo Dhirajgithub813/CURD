@@ -11,9 +11,13 @@ const MONGODB_URI = process.env.MONGODB_URI;
 
 // Middleware
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || '*'
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Application/json'],
+  credentials: false
 }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '..', 'frontend')));
 
 // Connect to MongoDB
@@ -140,6 +144,16 @@ app.delete('/api/tasks/:id', async (req, res) => {
     console.error('Error deleting task:', error);
     res.status(500).json({ message: 'Error deleting task' });
   }
+});
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ status: 'Server is running', timestamp: new Date() });
+});
+
+// Catch-all route for frontend (MUST be after all /api routes)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
 });
 
 app.listen(PORT, () => {
